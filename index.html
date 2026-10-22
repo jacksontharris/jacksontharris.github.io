@@ -1,43 +1,154 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jackson Harris</title>
+<meta name="description" content="Jackson Harris — geospatial data scientist working on deforestation, supply chains, and carbon removal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Same system as the Honduras coffee report: one reading column, full-width figures, map palette as accents. */
+:root {
+  --bg: #f7f6f2; --surface: #ffffff; --fg: #23211d; --muted: #6a665d; --rule: #dcd8cd;
+  --accent: #7a4a24; --hot: #c8161b; --forest: #4f7f45; --new: #e07a14;
+  --display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #191816; --surface: #23211e; --fg: #ece8df; --muted: #a39d90; --rule: #3a3731;
+  --accent: #c98d58; --hot: #ff5a4e; --forest: #8fbf83; --new: #f29a3c; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #191816; --surface: #23211e; --fg: #ece8df; --muted: #a39d90; --rule: #3a3731;
+  --accent: #c98d58; --hot: #ff5a4e; --forest: #8fbf83; --new: #f29a3c; color-scheme: dark }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 64px; }
+main { max-width: 1040px; margin: 0 auto; display: grid; gap: 56px; }
+.col { max-width: 68ch; }
+h1, h2 { font-family: var(--display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.55rem; font-weight: 600; margin-bottom: 16px; }
+h3 { font: 600 0.78rem/1.3 var(--body); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 10px; }
+p { margin: 0 0 12px; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+nav { display: flex; flex-wrap: wrap; gap: 6px 22px; font: 500 0.85rem var(--mono); }
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--fg); }
+.eyebrow { font: 500 0.8rem var(--mono); color: var(--muted); letter-spacing: 0.04em; margin: 28px 0 14px; }
+.lede { font-size: 1.15rem; margin-top: 18px; }
+figure { margin: 0; }
+.map img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); }
+figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 8px; }
+.projects { display: grid; gap: 0; border-top: 2px solid var(--fg); }
+.proj { display: grid; grid-template-columns: 9rem 1fr; gap: 6px 24px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.proj .when { font: 0.82rem var(--mono); color: var(--muted); padding-top: 4px; }
+.proj h4 { font: 600 1.15rem/1.3 var(--display); margin: 0 0 6px; }
+.proj p { margin: 0 0 8px; max-width: 68ch; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span { font: 0.75rem var(--mono); color: var(--muted); border: 1px solid var(--rule); background: var(--surface); padding: 1px 7px; border-radius: 3px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+.two > * { min-width: 0; }
+ul.plain { list-style: none; padding: 0; margin: 0; }
+ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); }
+ul.plain li small { display: block; color: var(--muted); font-size: 0.85rem; }
+.press { display: flex; flex-wrap: wrap; gap: 10px 28px; font: 600 1.15rem var(--display); color: var(--muted); }
+.note { border-left: 3px solid var(--rule); padding-left: 16px; color: var(--muted); font-size: 0.95rem; }
+footer { font: 0.85rem var(--mono); color: var(--muted); border-top: 1px solid var(--rule); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+@media (max-width: 560px) { .proj { grid-template-columns: 1fr; } }
+</style>
 </head>
-<body id="page">
-    <title>Jackson Harris</title>
-    <img src="./yak.JPG">
-    <h1>Styles!</h1>
-    <p>Feel free to click any of these links to see this webpage in a different style!</p>
-    <ul>
-        <li><a href="./more_pages/style1.html">Style 1</a></li>
-        <li><a href="./more_pages/style2.html">Style 2</a></li>
-        <li><a href="https://dartmouth-cs52-20s.github.io/lab1-landingpage-jacksontharris/">Style 3</a></li>
-    </ul>
-    
-    <h1>About Me</h2>
-    <p>Hi there, my name is Jackson. I'm a student of Geography and Computer Science.</p>    
-    <h2>Interests</h2>
-    <p>I like trees, flowers, and <a href="https://www.youtube.com/watch?v=HdROJE-Ltpk">kayaking!</a></p>
-    <h2>Work</h2>
-    <p>Here are some things you can ask me for help with!</p>
-    <ul>
-        <li>Python</li>
-        <li>Woodworking</li>
-        <li>Guitar</li>
-    </ul>
-    <p>Here are some things I need help with!</p>
-    <ul>
-        <li>Personal growth</li>
-        <li>Redux</li>
-        <li>Guitar</li>
-    </ul>
-    <h2>Contact Me</h2>
-    <p>
-        Feel free to ask me any questions!
-    </p>
-    <p>
-        Email: <input type="text">
-        Inquiry: <input type="text">
-    </p>
-    <button>Submit</button>
+<body>
+<main>
 
+<header class="col">
+  <nav aria-label="Site"><a href="#work">Work</a><a href="#writing">Writing &amp; press</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <div class="eyebrow">Geospatial data scientist · San Francisco</div>
+  <h1>Jackson Harris</h1>
+  <p class="lede">I use satellite data to find out where forests are being cleared, what's being grown or mined there, and who's buying it. Lately I've also been modeling carbon removal from enhanced rock weathering. I've spent about six years on this, working with researchers, campaigners, governments and companies.</p>
+</header>
+
+<section id="work">
+  <h2>Selected work</h2>
+  <div class="projects">
+    <article class="proj">
+      <div class="when">2026 · Consulting</div>
+      <div>
+        <h4>Coffee on recently cleared forest in Central America</h4>
+        <p>Overlaid the Forest Data Partnership's new coffee maps on Hansen forest loss for Honduras, Guatemala, Nicaragua and El Salvador. Found a few concentrated hotspots (Olancho, Alta Verapaz, Jinotega) and delivered a ranked list of field-check targets, including clearing after the EUDR cut-off.</p>
+        <div class="tags"><span>Earth Engine</span><span>Python</span><span>EUDR</span><span>supply chains</span></div>
+      </div>
+    </article>
+    <article class="proj">
+      <div class="when">2025–26 · Terradot</div>
+      <div>
+        <h4>River chemistry and downstream carbon loss from enhanced weathering</h4>
+        <p>Built Python and PostGIS pipelines that combine field measurements, hydrochemistry and carbonate-system modeling for enhanced rock weathering projects in Brazil. The work fed into site selection, MRV and project design documents. I also helped assemble and curate the field data used in <a href="https://arxiv.org/abs/2610.28973">From Weather to Enhanced Weathering</a>, a Terradot and Microsoft paper at the NeurIPS 2026 climate workshop.</p>
+        <div class="tags"><span>MRV</span><span>PostGIS</span><span>carbonate chemistry</span><span>Felt</span></div>
+      </div>
+    </article>
+    <article class="proj">
+      <div class="when">2024 · Mighty Earth</div>
+      <div>
+        <h4><a href="https://mightyearth.org/fromforeststoevs">From Forests to EVs: deforestation in the nickel supply chain</a></h4>
+        <p>Mapped forest loss around Indonesian nickel mines and smelters and traced it to battery and EV supply chains. The white paper helped push companies toward commitments on transparency and ecosystem rehabilitation.</p>
+        <div class="tags"><span>change detection</span><span>QGIS</span><span>white paper</span></div>
+      </div>
+    </article>
+    <article class="proj">
+      <div class="when">2020–25 · Mighty Earth</div>
+      <div>
+        <h4>Global deforestation rapid response</h4>
+        <p>Ran a monitoring program that linked new clearing to palm oil, soy, beef and cocoa suppliers. I built the pipelines, organized ground-truthing trips, and turned the findings into evidence for corporate engagement and press. That included interactive tools for the governments of Ghana and Côte d'Ivoire.</p>
+        <div class="tags"><span>Earth Engine</span><span>land cover classification</span><span>web mapping</span></div>
+      </div>
+    </article>
+    <article class="proj">
+      <div class="when">2020 · Harvard / GMU</div>
+      <div>
+        <h4>Machine learning on OMI satellite data</h4>
+        <p>NSF-funded research training models for cloud classification and air-quality analysis. Also co-authored three papers on how COVID-19 lockdowns changed air pollution, and an environmental dataset built for that research.</p>
+        <div class="tags"><span>ML</span><span>remote sensing</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <figure class="map"><img src="assets/map_honduras.png" alt="Map of Honduras showing standing forest, forest loss, 2024 coffee, new coffee, and coffee on recently cleared land">
+    <figcaption>From the Central America coffee work: 2024 coffee (brown), new coffee (orange) and coffee on land cleared 2018–2024 (red) in Honduras.</figcaption></figure>
+</section>
+
+<section id="writing" class="two">
+  <div>
+    <h3>Writing &amp; publications</h3>
+    <ul class="plain">
+      <li><a href="https://mightyearth.org/fromforeststoevs">From Forests to EVs</a><small>Mighty Earth, 2024 · nickel mining and deforestation in Indonesia</small></li>
+      <li><a href="https://doi.org/10.1016/j.scitotenv.2021.146027">Spatiotemporal changes in global nitrogen dioxide emission due to COVID-19 mitigation policies</a><small><i>Science of the Total Environment</i>, 2021 · co-author</small></li>
+      <li><a href="https://doi.org/10.1016/j.scitotenv.2020.141592">Spatiotemporal impacts of COVID-19 on air pollution in California, USA</a><small><i>Science of the Total Environment</i>, 2020 · co-author</small></li>
+      <li><a href="https://doi.org/10.3390/data5030068">An environmental data collection for COVID-19 pandemic research</a><small><i>Data</i>, 2020 · co-author</small></li>
+    </ul>
+  </div>
+  <div>
+    <h3>Work covered in</h3>
+    <div class="press"><span>New York Times</span><span>Reuters</span><span>BBC</span><span>Financial Times</span><span>Le Monde</span><span>Mongabay</span></div>
+  </div>
+</section>
+
+<section id="about" class="col">
+  <h2>About</h2>
+  <p>I studied geography and computer science at Dartmouth. Since then I've worked between the data and the people who act on it: the analyses I build go to companies deciding where to source from, governments designing traceability systems, and reporters checking a story.</p>
+  <p>I'm most interested in forest restoration, wildfire resilience, nature-based climate solutions and coastal ecosystems, especially in Latin America. Lately I've been getting into drone-based monitoring.</p>
+  <p class="note">Tools: Python, SQL/PostGIS, R, Google Earth Engine, QGIS, ArcGIS Pro, Felt, JavaScript/React.</p>
+</section>
+
+<footer id="contact">
+  <span>geojacksonharris@gmail.com</span>
+  <a href="https://www.linkedin.com/in/jackson-harris-b9983b187">LinkedIn</a>
+</footer>
+
+</main>
 </body>
+</html>
